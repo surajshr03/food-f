@@ -1,0 +1,42 @@
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    // Create data object
+    let data = {
+      recipeName: recipeName,
+      description: description,
+      file: file, // Assuming image upload is not required for now
+      ingredients: ingredients // Ingredients array
+    };
+  
+    // Optional: Add any additional data here if needed
+    data = {
+      ...data,
+      // Additional data can be added here if needed
+    };
+  
+    try {
+      // Make POST request to the server
+      const response = await axios({
+        url: "http://localhost:8000/recipe",
+        method: "POST",
+        data: data,
+        // headers: {
+        //   "Content-Type": "application/json", // Not necessary unless your server requires it
+        // },
+      });
+  
+      console.log("Form submitted successfully:", response.data);
+  
+      // Reset form fields after submission
+      setRecipeName("");
+      setDescription("");
+      setFile(null); // Commented out if image upload is not required
+      setPreview(null); // Commented out if image preview is not required
+      setIngredients([{ name: "" }]);
+  
+      navigate("/"); // Replace with your route
+    } catch (error) {
+      console.error("There was an error submitting the form!", error);
+    }
+  };

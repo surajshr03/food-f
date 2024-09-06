@@ -1,0 +1,3 @@
+-> When an element is positioned as fixed, it is removed from the normal document flow, meaning it doesn't take up space and doesn't affect the positioning of subsequent elements.(To ensure the main content starts below the navbar, you can add padding-top to the main content container equivalent to the height of the navbar plus any desired gap between them. Since your navbar has a fixed height of h-20 (which translates to 5rem or 80px in Tailwind CSS), you can add padding-top of at least this value to the main content container.)
+
+->

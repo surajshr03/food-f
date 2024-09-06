@@ -1,0 +1,114 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { FaBars, FaTimes, FaSearch, FaUserCircle } from "react-icons/fa";
+import { IoAddCircle } from "react-icons/io5";  
+import { MdOutlineFavorite } from "react-icons/md";
+
+
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleSearchClick = () => {
+    setSearchOpen(!searchOpen);
+  };
+
+  return (
+    <nav className="bg-white flex justify-between items-center px-8 py-4 shadow-lg w-[95%] lg:w-[80%] h-20 rounded-lg fixed top-5 left-1/2 transform -translate-x-1/2 z-50">
+      <div className="flex items-center space-x-3">
+        <Link to="/" className="flex items-center space-x-3">
+          <img
+            src="/tummy.jpg"
+            alt="Logo"
+            className="h-10 object-cover rounded-full"
+          />
+          <h1 className="text-black text-2xl font-bold cursor-pointer transition-transform duration-300 ease-linear hover:scale-105">
+            Tummy
+          </h1>
+        </Link>
+      </div>
+
+      <div className="flex items-center space-x-4">
+        {/* Hamburger Icon for Mobile */}
+        <div className="lg:hidden">
+          <button onClick={handleMenuClick} className="">
+            {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
+
+        {/* Search Icon for Mobile */}
+        <div className="lg:hidden ml-4">
+          <button onClick={handleSearchClick} className="">
+            <FaSearch size={24} />
+          </button>
+        </div>
+      </div>
+
+      {/* Search Bar for Mobile */}
+      <div
+        className={`absolute top-16 right-0 w-full max-w-xs ${
+          searchOpen ? "block" : "hidden"
+        } lg:hidden`}
+      >
+        <input
+          type="text"
+          placeholder="Type to search..."
+          className="border-2 border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-blue-500 transition-all duration-200 ease-linear hover:border-blue-500 hover:shadow-lg transform hover:scale-105 placeholder:text-sm"
+        />
+      </div>
+
+      {/* Search Bar for Large Screens */}
+      <div className="hidden lg:block">
+        <input
+          type="text"
+          placeholder="Type to search..."
+          className="border-2 border-gray-300 rounded-lg p-2 w-64 transition-all duration-300 ease-in-out hover:border-blue-500 hover:shadow-lg transform hover:scale-105 hover:placeholder:text-sm focus:outline-none focus:border-blue-500"
+        />
+      </div>
+
+      <ul
+        className={`${
+          menuOpen
+            ? "flex flex-col items-center absolute top-20 left-0 w-full bg-white shadow-lg lg:static lg:flex lg:flex-row lg:space-x-8 lg:mt-0 lg:w-auto lg:h-auto"
+            : "hidden"
+        } lg:flex items-center space-x-8`}
+      >
+        
+        <li className="transition-transform duration-300 ease-linear hover:scale-105">
+          <Link
+            to="/add"
+            className="flex items-center text-gray-700 text-lg font-medium py-2 px-4 transition-all duration-300 ease-linear hover:text-blue-500"
+          >
+            <IoAddCircle size={24} className="mr-2" />
+            Add
+          </Link>
+        </li>
+        <li className="transition-transform duration-300 ease-linear hover:scale-105">
+          <Link
+            to="/add"
+            className="flex items-center text-gray-700 text-lg font-medium py-2 px-4 transition-all duration-300 ease-linear hover:text-blue-500"
+          >
+            <MdOutlineFavorite size={24} className="mr-2" />
+            Favorites
+          </Link>
+        </li>
+        <li className="transition-transform duration-300 ease-linear hover:scale-105">
+          <Link
+            to="/profile"
+            className="flex items-center text-gray-700 text-lg font-medium py-2 px-4 transition-all duration-300 ease-linear hover:text-blue-500"
+          >
+            <FaUserCircle size={24} className="mr-2" />
+            Profile
+          </Link>
+        </li>
+       
+      </ul>
+    </nav>
+  );
+};
+
+export default Navbar;
